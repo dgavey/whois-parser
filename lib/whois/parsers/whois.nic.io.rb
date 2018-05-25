@@ -5,10 +5,7 @@
 #
 # Copyright (c) 2009-2018 Simone Carletti <weppos@weppos.net>
 #++
-
-
-require_relative 'base_icb'
-
+require_relative 'base_icann_compliant'
 
 module Whois
   class Parsers
@@ -18,30 +15,7 @@ module Whois
     # @see Whois::Parsers::Example
     #   The Example parser for the list of all available methods.
     #
-    class WhoisNicIo < BaseIcb
-
-      property_supported :domain do
-        if reserved?
-          nil
-        else
-          super()
-        end
-      end
-
-      property_supported :status do
-        if reserved?
-          :reserved
-        else
-          super()
-        end
-      end
-
-
-      # NEWPROPERTY
-      def reserved?
-        !!content_for_scanner.match(/^Domain reserved\n/)
-      end
-
+    class WhoisNicIo < BaseIcannCompliant
     end
 
   end
